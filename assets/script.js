@@ -11,12 +11,13 @@ var queryURL =
 console.log(queryURL);
 
 // key and queryURL for UV index
-// is  not working. no idea in how to do
-// var keyUV = "057e14341c48286f9140a48d5cf0795f";
-// var queryURLuv = "https://api.openweathermap.org/data/2.5/uvi?appid=" + keyUV;
-// ("&36.17&-86.78");
 
-// console.log(queryURLuv);
+var keyUV = "057e14341c48286f9140a48d5cf0795f";
+
+var queryURLuv =
+  "https://api.openweathermap.org/data/2.5/uvi?f&lat=36.17&lon=-86.78&appid=" +
+  keyUV;
+console.log(queryURLuv);
 
 // funciton to set the time
 function setTime() {
@@ -72,6 +73,7 @@ $.ajax({
     $("#date").text(moment().format("MMM Do YYYY"));
     $("#humidity").text("Humidity" + " " + response.main.humidity);
     $("#wind").text("Wind" + " " + response.wind.speed);
+    // $("#uv").text(response);
 
     // Convert the temp to fahrenheit
     var tempF = (response.main.temp - 273.15) * 1.8 + 32;
