@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Libations</title>
+    <!-- style sheet -->
+    <link rel="stylesheet" href="assets/style.css" />
+    <!-- Bootstrap CSS CDN  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <!-- Jumbotron opens -->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Libations</h1>
+        <p class="lead">
+          Welcome to our Webpage. Its easier to fond the best breweries here
+          with us!!!
+        </p>
+      </div>
+      <!-- Jumbotron closes -->
+    </div>
+
+    <div class="row">
+      <!-- col search opens -->
+      <div class="col s12 m4 l3">
+        <!-- container search opens -->
+        <div class="container">
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button
+              class="btn btn-outline-dark my-2 my-sm-0"
+              type="submit"
+              id="search"
+            >
+              Search
+            </button>
+          </form>
+          <!-- container search closes  -->
+        </div>
+
+        <!-- container for weather information opens -->
+        <div class="container" id="lastCities">
+          here goes the last cities searched.
+          <!-- container for weather information closes -->
+        </div>
+        <!-- col search closes -->
+      </div>
+      <!-- col weather opens -->
+      <div class="col s12 m8 l9">
+        <!-- container map opens -->
+        <div class="container" id="weatherBox">
+          <!-- Note that "m8 l9" was added -->
+
+          where the information of the weather will be.
+
+          <!-- container  closes -->
+        </div>
+        <!-- col weather closes -->
+      </div>
+    </div>
+
+    <!-- jQuery JS -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Code to the JavaScript File -->
+    <script src="assets/script.js"></script>
+  </body>
+</html>
