@@ -34,6 +34,7 @@ $.ajax({
 
   var newDiv = $("<div>");
   console.log(newDiv);
+  $("#container").append(newDiv);
 
   var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
     <input
@@ -51,10 +52,10 @@ $.ajax({
       Search
     </button>
   </form>`);
+  $(newDiv).append(newForm);
+  $("#input").append("#btn");
   console.log(newForm);
 
-  $(newForm).append(newDiv);
-  $(newDiv).append("#div");
   $("#btn").on("click", function(e) {
     e.preventDefault();
 
