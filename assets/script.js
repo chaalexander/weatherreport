@@ -1,28 +1,72 @@
+// moment js
 var showtime = $("#currentDay").text(setTime);
 console.log(showtime);
 
+// key and queryURL fro city
 var key = "5558573b04f9181b5515a2cc0280e2a9";
-
 var queryURL =
   "https://api.openweathermap.org/data/2.5/weather?" +
   "q=Nashville&appid=" +
   key;
 console.log(queryURL);
 
+// key and queryURL for UV index
+// is  not working. no idea in how to do
+// var keyUV = "057e14341c48286f9140a48d5cf0795f";
+// var queryURLuv = "https://api.openweathermap.org/data/2.5/uvi?appid=" + keyUV;
+// ("&36.17&-86.78");
+
+// console.log(queryURLuv);
+
+// funciton to set the time
 function setTime() {
   var time = moment().format("MMMM Do YYYY, h:mm a");
   return time;
 }
 console.log(setTime());
 
+// making the ajax call
 $.ajax({
   url: queryURL,
   method: "GET"
 }).then(function(response) {
   console.log(response);
 
-  $("#search").on("click", function(e) {
+  var newDiv = $("<div>");
+  console.log(newDiv);
+
+  var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
+    <input
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+      id= "input"
+    />
+    <button
+      class="btn btn-outline-dark my-2 my-sm-0"
+      type="submit"
+      id="btn"
+    >
+      Search
+    </button>
+  </form>`);
+  console.log(newForm);
+
+  $(newForm).append(newDiv);
+  $(newDiv).append("#div");
+  $("#btn").on("click", function(e) {
     e.preventDefault();
+
+    var guestInput = `<h1 id="city"></h1>
+    <h5 id="date"></h5>
+    <h5 id="temperature"></h5>
+    <h5 id="humidity"></h5>
+    <h5 id="wind"></h5>
+    <h5 id="uv"></h5>`;
+
+    $("#weatherBox").append(guestInput);
+
     $("#city").text(response.name);
     $("#date").text(moment().format("MMM Do YYYY"));
     $("#humidity").text("Humidity" + " " + response.main.humidity);
