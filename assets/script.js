@@ -26,7 +26,7 @@ function setTime() {
 }
 console.log(setTime());
 
-// making the ajax call
+// making the ajax call for weather
 $.ajax({
   url: queryURL,
   method: "GET"
@@ -73,7 +73,6 @@ $.ajax({
     $("#date").text(moment().format("MMM Do YYYY"));
     $("#humidity").text("Humidity" + " " + response.main.humidity);
     $("#wind").text("Wind" + " " + response.wind.speed);
-    // $("#uv").text(response);
 
     // Convert the temp to fahrenheit
     var tempF = (response.main.temp - 273.15) * 1.8 + 32;
@@ -86,5 +85,15 @@ $.ajax({
     console.log("Wind Speed: " + response.wind.speed);
     console.log("Humidity: " + response.main.humidity);
     console.log("Temperature (F): " + tempF);
+
+    // making ajax call for uv
+    $.ajax({
+      url: queryURLuv,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      $("#uv").text("UV" + " " + response.value);
+      console.log(response.value);
+    });
   });
 });
