@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Libations</title>
+    <title>Weather Report</title>
     <!-- style sheet -->
     <link rel="stylesheet" href="assets/style.css" />
     <!-- Bootstrap CSS CDN  -->
@@ -16,11 +16,11 @@
     <!-- Jumbotron opens -->
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h1 class="display-4">Libations</h1>
+        <h1 class="display-4">Weather Report</h1>
         <p class="lead">
-          Welcome to our Webpage. Its easier to fond the best breweries here
-          with us!!!
+          Welcome to the easiest and funniest weather report page out there.
         </p>
+        <p id="currentDay"></p>
       </div>
       <!-- Jumbotron closes -->
     </div>
@@ -61,7 +61,12 @@
         <div class="container" id="weatherBox">
           <!-- Note that "m8 l9" was added -->
 
-          where the information of the weather will be.
+          <h1 id="city"></h1>
+          <h3 id="date"></h3>
+          <h3 id="temperature"></h3>
+          <h3 id="humidity"></h3>
+          <h3 id="wind"></h3>
+          <h3 id="uv"></h3>
 
           <!-- container  closes -->
         </div>
@@ -72,6 +77,8 @@
     <!-- jQuery JS -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <!-- moment js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!-- Code to the JavaScript File -->
     <script src="assets/script.js"></script>
   </body>

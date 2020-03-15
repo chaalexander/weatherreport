@@ -1,0 +1,21 @@
+
+
+
+URL =
+key = "5558573b04f9181b5515a2cc0280e2a9"
+
+
+
+city name
+https://api.openweathermap.org/data/2.5/forecast?q={city name}&appid={your api key}
+
+city name and state
+https://api.openweathermap.org/data/2.5/forecast?q={city name},{state}&appid={your api key}
+
+city name state and country
+https://api.openweathermap.org/data/2.5/forecast?q={city name},{state},{country code}&appid={your api key}
+
+
+
+exemple=
+https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7DONB0veVS0TLbQ4onmpI6nDkmYBuO0Z&q=election&
