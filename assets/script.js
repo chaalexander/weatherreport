@@ -23,6 +23,8 @@ function setTime() {
 
 var queryTerm = " ";
 
+// creating the input box, btn and display area for local storage
+
 var newDiv = $("<div>");
 // console.log(newDiv);
 $("#container").append(newDiv);
@@ -47,6 +49,16 @@ $(newDiv).append(newForm);
 $("#input").append("#btn");
 // console.log(newForm);
 
+// creating the tags to hold last search cities
+function city() {
+  for (var i = 0; i < 10; i++) {
+    var cityDisplay = $("<p>");
+    $("#container").append(cityDisplay);
+    console.log(cityDisplay);
+  }
+}
+
+// creating the place to display the weather
 var guestInput = `<h1 id="city"></h1>
     <h5 id="date"></h5>
     <h5 id="temperature"></h5>
@@ -130,4 +142,5 @@ $("#btn").on("click", function(e) {
   e.preventDefault();
 
   callWeather();
+  city();
 });
