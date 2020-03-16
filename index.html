@@ -37,6 +37,24 @@
       <div class="col s12 m4 l3">
         <!-- container search opens -->
         <div class="container" id="container">
+          <form class="form-inline my-2 my-lg-0" id="form">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              id="input"
+            />
+            <button
+              class="btn btn-outline-dark my-2 my-sm-0"
+              type="submit"
+              id="btn"
+            >
+              <i class="fa fa-question-circle"></i>
+              Search
+            </button>
+          </form>
+
           <!-- container search closes  -->
         </div>
 
@@ -52,8 +70,13 @@
         <!-- container map opens -->
         <div class="container" id="weatherBox">
           <!-- Note that "m8 l9" was added -->
-
-          <!-- container  closes -->
+          <h1 id="city"></h1>
+          <h5 id="date"></h5>
+          <h5 id="temperature"></h5>
+          <h5 id="humidity"></h5>
+          <h5 id="wind"></h5>
+          <h5 id="uv"></h5> 
+          <!-- container  closes
         </div>
         <!-- col weather closes -->
       </div>

@@ -36,29 +36,19 @@ function callWeather(queryURLBase) {
   }).then(function(response) {
     console.log(response);
 
-    $("#weatherBox").append("<h2>" + response.name + "</h2>");
-    $("#weatherBox").append("<h4>" + setTime() + "</h4>");
-    $("#weatherBox").append(
-      "<h4>" + "Humidity" + " " + response.main.humidity + "</h4>"
-    );
-    $("#weatherBox").append(
-      "<h4>" + "Wind Speed: " + " " + response.wind.speed + "</h4>"
-    );
+    $("#city").text(response.name);
+    $("#date").text(setTime());
+    $("#humidity").text("Humidity" + " " + response.main.humidity);
+    $("#wind").text("Wind Speed: " + " " + response.wind.speed);
 
     // Convert the temp to fahrenheit
     // var tempF = (response.main.temp - 273.15) * 1.8 + 32;
 
     // add temp content to html
-    $("#weatherBox").append("<h4>" + response.main.temp + "</h4>");
-    // $("#weatherBox").append(
-    //   "<h4>" + "Temperature" + " " + tempF.toFixed(2) + "</h4>"
-    // );
+    $("#temperature").text(response.main.temp);
+    $("#temperature").text("Temperature" + " " + tempF.toFixed(2));
 
     // Log the data in the console as well
-    console.log("Wind Speed: " + response.wind.speed);
-    console.log("Humidity: " + response.main.humidity);
-    console.log("Temperature (F): " + tempF);
-    console.log("City" + response.name);
   });
   // making ajax call for uv
   $.ajax({
@@ -71,7 +61,6 @@ function callWeather(queryURLBase) {
   });
 }
 $("#btn").on("click", function(e) {
-  console.log("you click me");
   e.preventDefault();
 
   // Takes in the inputted value
