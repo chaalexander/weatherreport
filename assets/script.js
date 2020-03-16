@@ -5,13 +5,6 @@ console.log(showtime);
 // key and queryURL for city
 var authKey = "5558573b04f9181b5515a2cc0280e2a9";
 
-// key and queryURL for UV index
-// var authKeyUv = "057e14341c48286f9140a48d5cf0795f";
-// var queryURLuv =
-//   "https://api.openweathermap.org/data/2.5/uvi?f&lat=36.17&lon=-86.78&appid=" +
-//   authKeyUv;
-// console.log(queryURLuv);
-
 // function to set the time
 function setTime() {
   var time = moment().format("LLLL");
@@ -24,12 +17,21 @@ function callWeather() {
   var queryTerm = $("#input")
     .val()
     .trim();
+
+  // queryURL for city
   var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     queryTerm +
     "&appid=" +
     authKey;
   console.log(queryURL);
+
+  // key and queryURL for UV index
+
+  // var queryURLuv =
+  //   "https://api.openweathermap.org/data/2.5/uvi?f&lat=36.17&lon=-86.78&appid=" +
+  //   authKeyUv;
+  // console.log(queryURLuv);
 
   // making the ajax call for weather
   $.ajax({
