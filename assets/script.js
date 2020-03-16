@@ -15,9 +15,18 @@ var authKey = "5558573b04f9181b5515a2cc0280e2a9";
 // console.log(queryURLuv);
 
 // local Storage
-var cityHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 console.log(cityHistory);
+
+function loadCities() {
+  for (var i = 0; i < cityHistory.length; i++) {
+    var cityNewDiv = $("<div>");
+    cityNewDiv.text(cityHistory[i]);
+    cityNewDiv.appendTo("#lastCities");
+  }
+}
+console.log(loadCities());
 
 // function to set the time
 function setTime() {
