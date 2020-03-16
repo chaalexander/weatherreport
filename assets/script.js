@@ -14,6 +14,11 @@ var authKey = "5558573b04f9181b5515a2cc0280e2a9";
 //   keyUV;
 // console.log(queryURLuv);
 
+// local Storage
+var cityHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+console.log(cityHistory);
+
 // function to set the time
 function setTime() {
   var time = moment().format("LLLL");
@@ -48,15 +53,6 @@ var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
 $(newDiv).append(newForm);
 $("#input").append("#btn");
 // console.log(newForm);
-
-// creating the tags to hold last search cities
-function city() {
-  for (var i = 0; i < 10; i++) {
-    var cityDisplay = $("<p>");
-    $("#lastCities").append(cityDisplay);
-    console.log(cityDisplay);
-  }
-}
 
 // creating the place to display the weather
 var guestInput = `<h1 id="city"></h1>
@@ -141,6 +137,17 @@ $("#btn").on("click", function(e) {
   console.log("you click me");
   e.preventDefault();
 
+  var cityDiv = $("<div>");
+  var cityInput = $("#input")
+    .val()
+    .trim();
+
+  cityDiv.text(cityInput);
+
+  cityHistory.push(cityInput);
+
+  localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
+
+  cityDiv.prependTo(lastCities);
   callWeather();
-  city();
 });
