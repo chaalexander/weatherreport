@@ -3,31 +3,14 @@ var showtime = $("#currentDay").text(setTime);
 console.log(showtime);
 
 // key and queryURL for city
-// var authKey = "5558573b04f9181b5515a2cc0280e2a9";
-
-var cityInput = (queryTerm = $("#input")
-  .val()
-  .trim());
-console.log(queryTerm);
-
-// var queryURLBase =
-//   "https://api.openweathermap.org/data/2.5/weather?appid=" + authKey;
-
-var queryURLBase =
-  "https://api.openweathermap.org/data/2.5/weather?q=" +
-  cityInput +
-  "&appid=558573b04f9181b5515a2cc0280e2a9";
-
-console.log(queryURLBase);
+var authKey = "5558573b04f9181b5515a2cc0280e2a9";
 
 // key and queryURL for UV index
-
-var authKeyUv = "057e14341c48286f9140a48d5cf0795f";
-
-var queryURLuv =
-  "https://api.openweathermap.org/data/2.5/uvi?f&lat=36.17&lon=-86.78&appid=" +
-  authKeyUv;
-console.log(queryURLuv);
+// var authKeyUv = "057e14341c48286f9140a48d5cf0795f";
+// var queryURLuv =
+//   "https://api.openweathermap.org/data/2.5/uvi?f&lat=36.17&lon=-86.78&appid=" +
+//   authKeyUv;
+// console.log(queryURLuv);
 
 // function to set the time
 function setTime() {
@@ -36,14 +19,24 @@ function setTime() {
 }
 console.log(setTime());
 
-function callWeather(queryURLBase) {
+function callWeather() {
+  // Takes in the inputted value
+  var queryTerm = $("#input")
+    .val()
+    .trim();
+  var queryURL =
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    queryTerm +
+    "&appid=" +
+    authKey;
+  console.log(queryURL);
+
   // making the ajax call for weather
   $.ajax({
-    url: queryURLBase,
+    url: queryURL,
     method: "GET"
   }).then(function(response) {
     console.log(response);
-
     $("#city").text(response.name);
     $("#date").text(setTime());
     $("#humidity").text("Humidity" + " " + response.main.humidity);
@@ -55,26 +48,18 @@ function callWeather(queryURLBase) {
     // add temp content to html
     $("#temperature").text(response.main.temp);
     $("#temperature").text("Temperature" + " " + tempF.toFixed(2));
-
-    // Log the data in the console as well
   });
   // making ajax call for uv
-  $.ajax({
-    url: queryURLuv,
-    method: "GET"
-  }).then(function(response) {
-    console.log(response);
-    $("#uv").text("UV" + " " + response.value);
-    console.log(response.value);
-  });
+  // $.ajax({
+  //   url: queryURLuv,
+  //   method: "GET"
+  // }).then(function(response) {
+  //   console.log(response);
+  //   $("#uv").text("UV" + " " + response.value);
+  //   console.log(response.value);
+  // });
 }
 $("#btn").on("click", function(e) {
   e.preventDefault();
-
-  // Takes in the inputted value
-
-  // Concatenates inputted value with base url
-  var newURL = queryURLBase + "&q" + queryTerm;
-  console.log(newURL);
-  callWeather(newURL);
+  callWeather();
 });
