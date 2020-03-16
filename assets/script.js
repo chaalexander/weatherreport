@@ -83,22 +83,23 @@ $.ajax({
 
     $("#weatherBox").append(guestInput);
 
-    $("#city").text(response.name);
+    $("#city").text(response.city.name);
     $("#date").text(moment().format("MMM Do YYYY"));
-    $("#humidity").text("Humidity" + " " + response.main.humidity);
-    $("#wind").text("Wind" + " " + response.wind.speed);
+    $("#humidity").text("Humidity" + " " + response.list[0].main.humidity);
+    $("#wind").text("Wind" + " " + response.list[0].wind.speed);
 
     // Convert the temp to fahrenheit
-    var tempF = (response.main.temp - 273.15) * 1.8 + 32;
+    var tempF = (response.list[0].main.temp - 273.15) * 1.8 + 32;
 
     // add temp content to html
-    $("#temperature").text(response.main.temp);
+    $("#temperature").text(response.list[0].main.temp);
     $("#temperature").text("Temperature" + " " + tempF.toFixed(2));
 
     // Log the data in the console as well
-    console.log("Wind Speed: " + response.wind.speed);
-    console.log("Humidity: " + response.main.humidity);
+    console.log("Wind Speed: " + response.list[0].wind.speed);
+    console.log("Humidity: " + response.list[0].main.humidity);
     console.log("Temperature (F): " + tempF);
+    console.log("City" + response.city.name);
 
     // making ajax call for uv
     //     $.ajax({
