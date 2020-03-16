@@ -1,6 +1,6 @@
 // moment js
 var showtime = $("#currentDay").text(setTime);
-console.log(showtime);
+// console.log(showtime);
 
 // key and queryURL fro city
 var authKey = "5558573b04f9181b5515a2cc0280e2a9";
@@ -19,12 +19,12 @@ function setTime() {
   var time = moment().format("LLLL");
   return time;
 }
-console.log(setTime());
+// console.log(setTime());
 
 var queryTerm = " ";
 
 var newDiv = $("<div>");
-console.log(newDiv);
+// console.log(newDiv);
 $("#container").append(newDiv);
 
 var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
@@ -45,7 +45,20 @@ var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
 </form>`);
 $(newDiv).append(newForm);
 $("#input").append("#btn");
-console.log(newForm);
+// console.log(newForm);
+
+var guestInput = `<h1 id="city"></h1>
+    <h5 id="date"></h5>
+    <h5 id="temperature"></h5>
+    <h5 id="feels"></h5>
+    <h5 id="max"></h5>
+    <h5 id="min"></h5>
+    <h5 id="humidity"></h5>
+    <h5 id="wind"></h5>
+     <h5 id="uv"></h5>`;
+
+$("#weatherBox").append(guestInput);
+// console.log(guestInput);
 
 function callWeather(queryURL) {
   // Takes in the inputted value
@@ -68,32 +81,38 @@ function callWeather(queryURL) {
   }).then(function(response) {
     console.log(response);
 
-    var guestInput = `<h1 id="city"></h1>
-    <h5 id="date"></h5>
-    <h5 id="temperature"></h5>
-    <h5 id="humidity"></h5>
-    <h5 id="wind"></h5>
-     <h5 id="uv"></h5>`;
-
-    $("#weatherBox").append(guestInput);
-
     $("#city").text(response.name);
     $("#date").text(setTime());
-    $("#humidity").text("Humidity" + " " + response.main.humidity);
-    $("#wind").text("Wind Speed: " + " " + response.wind.speed);
+    $("#humidity").text("Humidity:" + " " + response.main.humidity);
+    $("#wind").text("Wind Speed: " + " " + response.wind.speed + "mph");
 
-    // Convert the temp to fahrenheit
+    // Convert the temperature to fahrenheit
     var tempF = (response.main.temp - 273.15) * 1.8 + 32;
+    var feelsF = (response.main.feels_like - 273.15) * 1.8 + 32;
+    var maxF = (response.main.temp_max - 273.15) * 1.8 + 32;
+    var minF = (response.main.temp_min - 273.15) * 1.8 + 32;
 
     // add temp content to html
     $("#temperature").text(response.main.temp);
-    $("#temperature").text("Temperature" + " " + tempF.toFixed(2));
+    $("#temperature").text("Temperature:" + " " + tempF.toFixed(2));
+
+    // add fells like to html
+    $("#feels").text(response.main.feels_like);
+    $("#feels").text("Feels Like:" + " " + feelsF.toFixed(2));
+
+    // add max temp
+    $("#max").text(response.main.temp_max);
+    $("#max").text("Max:" + " " + maxF.toFixed(2));
+
+    // add min temp
+    $("#min").text(response.main.temp_min);
+    $("#min").text("Min:" + " " + minF.toFixed(2));
 
     // Log the data in the console as well
-    console.log("Wind Speed: " + response.wind.speed);
-    console.log("Humidity: " + response.main.humidity);
-    console.log("Temperature (F): " + tempF);
-    console.log("City" + response.name);
+    // console.log("Wind Speed: " + response.wind.speed);
+    // console.log("Humidity: " + response.main.humidity);
+    // console.log("Temperature (F): " + tempF);
+    // console.log("City" + response.name);
 
     // making ajax call for uv
     //     $.ajax({
