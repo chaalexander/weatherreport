@@ -1,0 +1,35 @@
+body {
+  background-color: blueviolet;
+}
+
+.jumbotron {
+  background-color: blueviolet !important;
+  text-align: center;
+}
+#currentDay {
+  text-align: right;
+  font-size: 10px;
+  font-family: "Press Start 2P", cursive;
+}
+
+.display-4 {
+  font-family: "Special Elite", cursive;
+  font-size: 80px !important;
+}
+
+#container,
+#lastCities {
+  margin-left: 30px;
+}
+
+#lastCities {
+  margin-top: 15px;
+  background-color: cadetblue;
+  width: 400px;
+  height: 400px;
+  font-size: 25px;
+}
+
+#weatherBox {
+  background-color: chocolate;
+}
