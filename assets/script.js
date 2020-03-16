@@ -23,6 +23,30 @@ console.log(setTime());
 
 var queryTerm = " ";
 
+var newDiv = $("<div>");
+console.log(newDiv);
+$("#container").append(newDiv);
+
+var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
+  <input
+    class="form-control mr-sm-2"
+    type="search"
+    placeholder="Search"
+    aria-label="Search"
+    id= "input"
+  />
+  <button
+    class="btn btn-outline-dark my-2 my-sm-0"
+    type="submit"
+    id="btn"
+  ><i class= "fa fa-question-circle"></i>
+    Search
+  </button>
+</form>`);
+$(newDiv).append(newForm);
+$("#input").append("#btn");
+console.log(newForm);
+
 function callWeather(queryURL) {
   // Takes in the inputted value
   var queryTerm = $("#input")
@@ -44,29 +68,6 @@ function callWeather(queryURL) {
   }).then(function(response) {
     console.log(response);
 
-    var newDiv = $("<div>");
-    console.log(newDiv);
-    $("#container").append(newDiv);
-
-    var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        id= "input"
-      />
-      <button
-        class="btn btn-outline-dark my-2 my-sm-0"
-        type="submit"
-        id="btn"
-      ><i class= "fa fa-question-circle"></i>
-        Search
-      </button>
-    </form>`);
-    $(newDiv).append(newForm);
-    $("#input").append("#btn");
-    console.log(newForm);
     var guestInput = `<h1 id="city"></h1>
     <h5 id="date"></h5>
     <h5 id="temperature"></h5>
