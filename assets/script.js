@@ -3,12 +3,20 @@ var showtime = $("#currentDay").text(setTime);
 console.log(showtime);
 
 // key and queryURL for city
-var authKey = "5558573b04f9181b5515a2cc0280e2a9";
+// var authKey = "5558573b04f9181b5515a2cc0280e2a9";
 
-var queryTerm = " ";
+var cityInput = (queryTerm = $("#input")
+  .val()
+  .trim());
+console.log(queryTerm);
+
+// var queryURLBase =
+//   "https://api.openweathermap.org/data/2.5/weather?appid=" + authKey;
 
 var queryURLBase =
-  "https://api.openweathermap.org/data/2.5/weather?appid=" + authKey;
+  "https://api.openweathermap.org/data/2.5/weather?q=" +
+  cityInput +
+  "&appid=558573b04f9181b5515a2cc0280e2a9";
 
 console.log(queryURLBase);
 
@@ -42,7 +50,7 @@ function callWeather(queryURLBase) {
     $("#wind").text("Wind Speed: " + " " + response.wind.speed);
 
     // Convert the temp to fahrenheit
-    // var tempF = (response.main.temp - 273.15) * 1.8 + 32;
+    var tempF = (response.main.temp - 273.15) * 1.8 + 32;
 
     // add temp content to html
     $("#temperature").text(response.main.temp);
@@ -64,10 +72,6 @@ $("#btn").on("click", function(e) {
   e.preventDefault();
 
   // Takes in the inputted value
-  queryTerm = $("#input")
-    .val()
-    .trim();
-  console.log(queryTerm);
 
   // Concatenates inputted value with base url
   var newURL = queryURLBase + "&q" + queryTerm;
