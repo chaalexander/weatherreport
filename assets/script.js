@@ -53,7 +53,7 @@ $("#input").append("#btn");
 function city() {
   for (var i = 0; i < 10; i++) {
     var cityDisplay = $("<p>");
-    $("#container").append(cityDisplay);
+    $("#lastCities").append(cityDisplay);
     console.log(cityDisplay);
   }
 }
