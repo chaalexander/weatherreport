@@ -20,7 +20,7 @@ var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 console.log(cityHistory);
 
 function loadCities() {
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < cityHistory.length; i++) {
     var cityNewDiv = $("<div>");
     cityNewDiv.text(cityHistory[i]);
     cityNewDiv.appendTo("#lastCities");
