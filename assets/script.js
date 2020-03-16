@@ -2,24 +2,24 @@
 var showtime = $("#currentDay").text(setTime);
 console.log(showtime);
 
-// key and queryURL fro city
-var key = "5558573b04f9181b5515a2cc0280e2a9";
+// key and queryURL for city
+var authKey = "5558573b04f9181b5515a2cc0280e2a9";
+
+var queryTerm = " ";
+
 var queryURLBase =
-  "https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=" + key;
-var queryURL =
-  "https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=5558573b04f9181b5515a2cc0280e2a9";
+  "https://api.openweathermap.org/data/2.5/weather?appid=" + authKey;
 
 console.log(queryURLBase);
-console.log(queryURL);
 
 // key and queryURL for UV index
 
-// var keyUV = "057e14341c48286f9140a48d5cf0795f";
+var authKeyUv = "057e14341c48286f9140a48d5cf0795f";
 
-// var queryURLuv =
-//   "https://api.openweathermap.org/data/2.5/uvi?f&lat=36.17&lon=-86.78&appid=" +
-//   keyUV;
-// console.log(queryURLuv);
+var queryURLuv =
+  "https://api.openweathermap.org/data/2.5/uvi?f&lat=36.17&lon=-86.78&appid=" +
+  authKeyUv;
+console.log(queryURLuv);
 
 // function to set the time
 function setTime() {
@@ -28,88 +28,60 @@ function setTime() {
 }
 console.log(setTime());
 
-var queryTerm = " ";
+function callWeather(queryURLBase) {
+  // making the ajax call for weather
+  $.ajax({
+    url: queryURLBase,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
 
-// function runQuery(queryURL) {
-// making the ajax call for weather
-$.ajax({
-  url: queryURL,
-  method: "GET"
-}).then(function(response) {
-  console.log(response);
-
-  var newDiv = $("<div>");
-  console.log(newDiv);
-  $("#container").append(newDiv);
-
-  var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        id= "input"
-      />
-      <button
-        class="btn btn-outline-dark my-2 my-sm-0"
-        type="submit"
-        id="btn"
-      ><i class= "fa fa-question-circle"></i>
-        Search
-      </button>
-    </form>`);
-  $(newDiv).append(newForm);
-  $("#input").append("#btn");
-  console.log(newForm);
-
-  $("#btn").on("click", function(e) {
-    console.log("you click me");
-    e.preventDefault();
-
-    var queryTerm = $("#input")
-      .val()
-      .trim();
-    console.log(queryTerm);
-
-    var newURL = queryURLBase + "&q" + queryTerm;
-    console.log(newURL);
-
-    var guestInput = `<h1 id="city"></h1>
-      <h5 id="date"></h5>
-      <h5 id="temperature"></h5>
-      <h5 id="humidity"></h5>
-      <h5 id="wind"></h5>
-       <h5 id="uv"></h5>`;
-
-    $("#weatherBox").append(guestInput);
-
-    $("#city").text(response.city.name);
-    $("#date").text(moment().format("MMM Do YYYY"));
-    $("#humidity").text("Humidity" + " " + response.list[0].main.humidity);
-    $("#wind").text("Wind" + " " + response.list[0].wind.speed);
+    $("#weatherBox").append("<h2>" + response.name + "</h2>");
+    $("#weatherBox").append("<h4>" + setTime() + "</h4>");
+    $("#weatherBox").append(
+      "<h4>" + "Humidity" + " " + response.main.humidity + "</h4>"
+    );
+    $("#weatherBox").append(
+      "<h4>" + "Wind Speed: " + " " + response.wind.speed + "</h4>"
+    );
 
     // Convert the temp to fahrenheit
-    var tempF = (response.list[0].main.temp - 273.15) * 1.8 + 32;
+    // var tempF = (response.main.temp - 273.15) * 1.8 + 32;
 
     // add temp content to html
-    $("#temperature").text(response.list[0].main.temp);
-    $("#temperature").text("Temperature" + " " + tempF.toFixed(2));
+    $("#weatherBox").append("<h4>" + response.main.temp + "</h4>");
+    // $("#weatherBox").append(
+    //   "<h4>" + "Temperature" + " " + tempF.toFixed(2) + "</h4>"
+    // );
 
     // Log the data in the console as well
-    console.log("Wind Speed: " + response.list[0].wind.speed);
-    console.log("Humidity: " + response.list[0].main.humidity);
+    console.log("Wind Speed: " + response.wind.speed);
+    console.log("Humidity: " + response.main.humidity);
     console.log("Temperature (F): " + tempF);
-    console.log("City" + response.city.name);
-
-    // making ajax call for uv
-    //     $.ajax({
-    //       url: queryURLuv,
-    //       method: "GET"
-    //     }).then(function(response) {
-    //       console.log(response);
-    //       $("#uv").text("UV" + " " + response.value);
-    //       console.log(response.value);
-    //     });
+    console.log("City" + response.name);
   });
+  // making ajax call for uv
+  $.ajax({
+    url: queryURLuv,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+    $("#uv").text("UV" + " " + response.value);
+    console.log(response.value);
+  });
+}
+$("#btn").on("click", function(e) {
+  console.log("you click me");
+  e.preventDefault();
+
+  // Takes in the inputted value
+  queryTerm = $("#input")
+    .val()
+    .trim();
+  console.log(queryTerm);
+
+  // Concatenates inputted value with base url
+  var newURL = queryURLBase + "&q" + queryTerm;
+  console.log(newURL);
+  callWeather(newURL);
 });
-// }
