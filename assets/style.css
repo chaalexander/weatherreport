@@ -30,6 +30,6 @@ body {
   font-size: 25px;
 }
 
-#weatherBox {
-  background-color: chocolate;
-}
+/* #forecast {
+  display: flex;
+} */
