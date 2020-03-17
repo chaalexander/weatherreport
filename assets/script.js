@@ -1,14 +1,17 @@
 // moment js
 var showtime = $("#currentDay").text(setTime);
+// console.log(showtime);
 
 // key for city
 var authKey = "5558573b04f9181b5515a2cc0280e2a9";
 
-// key for UV index
+// keyfor UV index
 var keyUV = "057e14341c48286f9140a48d5cf0795f";
 
 // local Storage
 var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
+
+console.log(cityHistory);
 
 function loadCities() {
   for (var i = 0; i < cityHistory.length; i++) {
@@ -17,19 +20,21 @@ function loadCities() {
     cityNewDiv.appendTo("#lastCities");
   }
 }
+console.log(loadCities());
 
 // function to set the time
 function setTime() {
   var time = moment().format("LLLL");
   return time;
 }
+// console.log(setTime());
 
 var queryTerm = " ";
 
 // creating the input box, btn and display area for local storage
 
 var newDiv = $("<div>");
-
+// console.log(newDiv);
 $("#container").append(newDiv);
 
 var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
@@ -50,6 +55,7 @@ var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
 </form>`);
 $(newDiv).append(newForm);
 $("#input").append("#btn");
+// console.log(newForm);
 
 // creating the place to display the weather
 var guestInput = `<h1 id="city"></h1>
@@ -63,6 +69,7 @@ var guestInput = `<h1 id="city"></h1>
      <h5 id="uv"></h5>`;
 
 $("#weatherBox").append(guestInput);
+// console.log(guestInput);
 
 function callWeather(queryURL) {
   // Takes in the inputted value
@@ -70,18 +77,24 @@ function callWeather(queryURL) {
     .val()
     .trim();
 
+  // clear input
+  // $("#input").text("");
+
   // queryURL for city current day
   var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     queryTerm +
     "&appid=" +
     authKey;
+  console.log(queryURL);
 
   // making the ajax call for weather
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
+    console.log(response);
+
     $("#city").text(response.name);
     $("#date").text(setTime());
     $("#humidity").text("Humidity:" + " " + response.main.humidity);
@@ -172,6 +185,7 @@ function callWeather(queryURL) {
   });
 }
 $("#btn").on("click", function(e) {
+  console.log("you click me");
   e.preventDefault();
 
   var cityDiv = $("<div>");
