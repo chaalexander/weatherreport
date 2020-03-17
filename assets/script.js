@@ -15,9 +15,11 @@ var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 function loadCities() {
   for (var i = cityHistory.length - 10; i < cityHistory.length; i++) {
-    var cityNewDiv = $("<div>");
+    var list = $("<div>");
+    var cityNewDiv = $("<button>");
     cityNewDiv.text(cityHistory[i]);
-    cityNewDiv.appendTo("#lastCities");
+    cityNewDiv.appendTo(list);
+    $("#lastCities").append(list);
   }
 }
 console.log(loadCities());
@@ -178,6 +180,7 @@ function callWeather(queryURL) {
     // console.log(forecast5Days);
   });
 }
+
 $("#btn").on("click", function(e) {
   console.log("you click me");
   e.preventDefault();

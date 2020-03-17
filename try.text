@@ -29,3 +29,11 @@
 // $("#feels").text(response.list[i].main.feels_like);
 // http://openweathermap.org/img/wn/10d@2x.png
 // have a image on the card to make it easier to display
+
+
+
+
+
+function refreshPage() {
+  window.location.reload();
+}
