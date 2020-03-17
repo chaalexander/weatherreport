@@ -14,7 +14,7 @@ var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 // console.log(cityHistory);
 
 function loadCities() {
-  for (var i = 0; i < cityHistory.length; i++) {
+  for (var i = cityHistory.length - 10; i < cityHistory.length; i++) {
     var cityNewDiv = $("<div>");
     cityNewDiv.text(cityHistory[i]);
     cityNewDiv.appendTo("#lastCities");
@@ -181,113 +181,36 @@ function callWeather(queryURL) {
     console.log(response.list);
 
     // creating the cards for the 4 days forecast
-    var divForecast = $("<div>");
-    $("#forecast").append(divForecast);
+    var forecast5Days = $(` <div class="card-group"></div>`);
+    var color = ["primary", "danger", "warning", "success"];
 
-    var forecast5Days = $(` <div class="card-group">
-          
-    
-    <div class="card border-primary mb-3" style="max-width: 18rem;">
-    <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
-    <div class="card-body text-primary">
-      <h5 class="card-title"></h5>
-      <p class="time1"></p>
-      <p class="humidity1"></p>
-      <p class="speed1"></p>
-      <p class="temp1"></p>
-      <p class="feels1"></p>
-      <p class="max1"></p>
-      <p class="min1"></p>
-      
-    </div>
-  </div>
-          
-  
-  <div class="card border-success mb-3" style="max-width: 18rem;">
-  <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
-  <div class="card-body text-success">
-    <h5 class="card-title"></h5>
-    <p class="time2"></p>
-    <p class="humidity2"></p>
-    <p class="speed2"></p>
-    <p class="temp2"></p>
-    <p class="feels2"></p>
-    <p class="max2"></p>
-    <p class="min2"></p>
-      
-    </p>
-  </div>
-</div>
-          
-<div class="card border-danger mb-3" style="max-width: 18rem;">
-<img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
-<div class="card-body text-danger">
-  <h5 class="card-title"></h5>
-  <p class="time3"></p>
-  <p class="humidity3"></p>
-  <p class="speed3"></p>
-  <p class="temp3"></p>
-  <p class="feels3"></p>
-  <p class="max3"></p>
-  <p class="min3"></p>
-  
-  </p>
-</div>
-</div>
+    for (var i = 0; i < 5; i++) {
+      var tempF = (response.list[i].main.temp - 273.15) * 1.8 + 32;
+      var feelsF = (response.list[i].main.feels_like - 273.15) * 1.8 + 32;
+      var maxF = (response.list[i].main.temp_max - 273.15) * 1.8 + 32;
+      var minF = (response.list[i].main.temp_min - 273.15) * 1.8 + 32;
 
-<div class="card border-warning mb-3" style="max-width: 18rem;">
-<img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
- <div class="card-body text-warning">
-    <h5 class="card-title"></h5>
-    <p class="time4"></p>
-    <p class="humidity4"></p>
-    <p class="speed4"></p>
-    <p class="temp4"></p>
-    <p class="feels4"></p>
-    <p class="max4"></p>
-    <p class="min4"></p>
-    
-    </p>
-  </div>
- </div>
- 
-</div>`);
+      var forecastCard = $(`<div class="card border-${
+        color[i]
+      } mb-3" style="max-width: 18rem;">
+      <img src="http://openweathermap.org/img/wn/${
+        response.list[i].weather[0].icon
+      }@2x.png" class="card-img-top" alt="icon of weather">
+      <div class="card-body text-${color[i]}">
+        <h5 class="card-title">${response.city.name}</h5>
+        <p class="time"></p>
+        <p>Temperature: ${tempF.toFixed(2)}</p>
+        <p>Feels Like: ${feelsF.toFixed(2)}</p>
+        <p>Min:</p>
+        <p>Max</p>
+        <p>Humidity: ${response.list[i].main.humidity}</p>
+      </div>
+      </div>`);
 
+      forecast5Days.append(forecastCard);
+    }
     $("#forecast").append(forecast5Days);
-    console.log(forecast5Days);
-
-    $(".card-title").text(response.city.name);
-    $(".time1").text(moment().add(1, "days"));
-    $(".time2").text(moment().add(2, "days"));
-    $(".time3").text(moment().add(3, "days"));
-    $(".time4").text(moment().add(4, "days"));
-
-    $(".humidity1").text("Humidity:" + " " + response.list[7].main.humidity);
-    $(".speed1").text(
-      "Wind Speed:" + " " + response.list[7].wind.speed + "mph"
-    );
-    // Convert the temperature to fahrenheit
-    var tempF1 = (response.list[7].main.temp - 273.15) * 1.8 + 32;
-    var feelsF1 = (response.list[7].main.feels_like - 273.15) * 1.8 + 32;
-    var maxF1 = (response.list[7].main.temp_max - 273.15) * 1.8 + 32;
-
-    var minF1 = (response.list[7].main.temp_min - 273.15) * 1.8 + 32;
-
-    // add temp content to html
-    $(".temp1").text(response.list[7].main.temp);
-    $(".temp1").text("Temperature:" + " " + tempF1.toFixed(2));
-
-    // add fells like to html
-    $(".feels1").text(response.list[7].main.feels_like);
-    $("feels1").text("Feels Like:" + " " + feelsF1.toFixed(2));
-
-    // add max temp
-    $(".max1").text(response.list[7].main.temp_max);
-    $(".max1").text("Max:" + " " + maxF1.toFixed(2));
-
-    // add min temp
-    $(".min1").text(response.list[7].main.temp_min);
-    $(".min1").text("Min:" + " " + minF1.toFixed(2));
+    // console.log(forecast5Days);
   });
 }
 $("#btn").on("click", function(e) {
