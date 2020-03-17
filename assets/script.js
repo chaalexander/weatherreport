@@ -96,7 +96,7 @@ function callWeather(queryURL) {
     // console.log(response);
 
     $("#city").text(response.name);
-    $("#date").text(setTime());
+    $("#date").text(moment().format("dddd"));
     $("#humidity").text("Humidity:" + " " + response.main.humidity);
     $("#wind").text("Wind Speed: " + " " + response.wind.speed + "mph");
 
@@ -147,7 +147,7 @@ function callWeather(queryURL) {
     queryTerm +
     "&appid=" +
     authKey;
-  // console.log(queryForecast);
+  console.log(queryForecast);
 
   // ajaxcall for forecast
 
@@ -155,37 +155,90 @@ function callWeather(queryURL) {
     url: queryForecast,
     method: "GET"
   }).then(function(response) {
-    // console.log(response);
+    console.log(response);
 
-    for (var i = 0; i < 5; i++) {
-      console.log(response.list[i]);
+    // creating the cards for the 4 days forecast
+    var divForecast = $("<div>");
+    $("#forecast").append(divForecast);
 
-      var divForecast = $("<div>");
-      $("#forecast").append(divForecast);
+    var forecast5Days = $(` <div class="card-group">
+          
+    
+    <div class="card border-primary mb-3" style="max-width: 18rem;">
+    <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
+    <div class="card-body text-primary">
+      <h5 class="card-title"></h5>
+      <p class="card-text" id= "c1">
+      <li>Date:</li>
+      <li>Temperature:</li>
+      <li>Fells Like:</li>
+      <li>Max:</li>
+      <li>Min:</li>
+      <li>Humidity:</li>
+      <li>Wind Speed:</li>
+      <li>UV:</li>
+      </p>
+    </div>
+  </div>
+          
+  
+  <div class="card border-success mb-3" style="max-width: 18rem;">
+  <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
+  <div class="card-body text-success">
+    <h5 class="card-title"></h5>
+    <p class="card-text" id= "c2">
+      <li>Date:</li>
+      <li>Temperature:</li>
+      <li>Fells Like:</li>
+      <li>Max:</li>
+      <li>Min:</li>
+      <li>Humidity:</li>
+      <li>Wind Speed:</li>
+      <li>UV:</li>
+    </p>
+  </div>
+</div>
+          
+<div class="card border-danger mb-3" style="max-width: 18rem;">
+<img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
+<div class="card-body text-danger">
+  <h5 class="card-title"></h5>
+  <p class="card-text">
+      <li>Date:</li>
+      <li>Temperature:</li>
+      <li>Fells Like:</li>
+      <li>Max:</li>
+      <li>Min:</li>
+      <li>Humidity:</li>
+      <li>Wind Speed:</li>
+      <li>UV:</li>
+  </p>
+</div>
+</div>
 
-      var forecast5Days = `<h1 id="city"></h1>
-        <h5 id="date"></h5>
-        <h5 id="temperature"></h5>
-        <h5 id="feels"></h5>
-        <h5 id="max"></h5>
-        <h5 id="min"></h5>
-        <h5 id="humidity"></h5>
-        <h5 id="wind"></h5>
-         <h5 id="uv"></h5>`;
-      $(divForecast).append(forecast5Days);
+<div class="card border-warning mb-3" style="max-width: 18rem;">
+<img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
+ <div class="card-body text-warning">
+    <h5 class="card-title"></h5>
+    <p class="card-text">
+      <li>Date:</li>
+      <li>Temperature:</li>
+      <li>Fells Like:</li>
+      <li>Max:</li>
+      <li>Min:</li>
+      <li>Humidity:</li>
+      <li>Wind Speed:</li>
+      <li>UV:</li>
+    </p>
+  </div>
+ </div>
+ 
+</div>`);
 
-      $("#city").text(response.city.name);
-      $("#date").text(
-        moment()
-          .add(1, "days")
-          .calendar()
-      );
-      $("#humidity").text("Humidity:" + " " + response.list[i].main.humidity);
-      $("#wind").text(
-        "Wind Speed: " + " " + response.list[i].wind.speed + "mph"
-      );
-      // console.log(forecast5Days);
-    }
+    $("#forecast").append(forecast5Days);
+    console.log(forecast5Days);
+
+    $(".card-title").text(response.city.name);
   });
 }
 $("#btn").on("click", function(e) {
