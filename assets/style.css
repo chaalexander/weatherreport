@@ -34,3 +34,12 @@ h5,
 h3 {
   text-align: center;
 }
+
+#weatherBox {
+  margin-left: -250px;
+}
+
+#forecast {
+  margin-top: 30px;
+  margin-left: -200px;
+}

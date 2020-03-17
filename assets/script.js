@@ -182,7 +182,7 @@ function callWeather(queryURL) {
 
     // creating the cards for the 4 days forecast
     var forecast5Days = $(` <div class="card-group"></div>`);
-    var color = ["primary", "danger", "warning", "success"];
+    var color = ["warning", "danger", "success", "warning", "danger"];
 
     for (var i = 0; i < 5; i++) {
       var tempF = (response.list[i].main.temp - 273.15) * 1.8 + 32;
@@ -201,8 +201,8 @@ function callWeather(queryURL) {
         <p class="time"></p>
         <p>Temperature: ${tempF.toFixed(2)}</p>
         <p>Feels Like: ${feelsF.toFixed(2)}</p>
-        <p>Min:</p>
-        <p>Max</p>
+        <p>Min: ${minF.toFixed(2)} </p>
+        <p>Max: ${maxF.toFixed(2)}</p>
         <p>Humidity: ${response.list[i].main.humidity}</p>
       </div>
       </div>`);
