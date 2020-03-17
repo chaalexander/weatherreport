@@ -30,6 +30,7 @@ body {
   font-size: 25px;
 }
 
-/* #forecast {
-  display: flex;
-} */
+h5,
+h3 {
+  text-align: center;
+}

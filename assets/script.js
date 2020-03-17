@@ -58,7 +58,27 @@ $("#input").append("#btn");
 // console.log(newForm);
 
 // creating the place to display the weather
-var guestInput = `<h1 id="city"></h1>
+
+// var guestInput = $(`<div class="card bg-dark text-white">
+// <img src="http://openweathermap.org/img/wn/2x.png" class="card-img" alt="...">
+// <div class="card-img-overlay">
+//   <h5 class="card-title" id="city"></h5>
+//   <p class="card-text" id= "current-day">
+//   <h3 id="city"></h3>
+// <h5 id="date"></h5>
+// <h5 id="temperature"></h5>
+// <h5 id="feels"></h5>
+// <h5 id="max"></h5>
+// <h5 id="min"></h5>
+// <h5 id="humidity"></h5>
+// <h5 id="wind"></h5>
+// //      <h5 id="uv"></h5>
+
+//   </p>
+
+// </div>
+// </div>`);
+var guestInput = `<h3 id="city"></h3>
     <h5 id="date"></h5>
     <h5 id="temperature"></h5>
     <h5 id="feels"></h5>
@@ -70,6 +90,9 @@ var guestInput = `<h1 id="city"></h1>
 
 $("#weatherBox").append(guestInput);
 // console.log(guestInput);
+
+var urlIcon = "http://openweathermap.org/img/wn/2x.png";
+console.log(urlIcon);
 
 function callWeather(queryURL) {
   // Takes in the inputted value
@@ -155,7 +178,7 @@ function callWeather(queryURL) {
     url: queryForecast,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
+    console.log(response.list);
 
     // creating the cards for the 4 days forecast
     var divForecast = $("<div>");
@@ -168,16 +191,14 @@ function callWeather(queryURL) {
     <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
     <div class="card-body text-primary">
       <h5 class="card-title"></h5>
-      <p class="card-text" id= "c1">
-      <li>Date:</li>
-      <li>Temperature:</li>
-      <li>Fells Like:</li>
-      <li>Max:</li>
-      <li>Min:</li>
-      <li>Humidity:</li>
-      <li>Wind Speed:</li>
-      <li>UV:</li>
-      </p>
+      <p class="time1"></p>
+      <p class="humidity1"></p>
+      <p class="speed1"></p>
+      <p class="temp1"></p>
+      <p class="feels1"></p>
+      <p class="max1"></p>
+      <p class="min1"></p>
+      
     </div>
   </div>
           
@@ -186,15 +207,8 @@ function callWeather(queryURL) {
   <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
   <div class="card-body text-success">
     <h5 class="card-title"></h5>
-    <p class="card-text" id= "c2">
-      <li>Date:</li>
-      <li>Temperature:</li>
-      <li>Fells Like:</li>
-      <li>Max:</li>
-      <li>Min:</li>
-      <li>Humidity:</li>
-      <li>Wind Speed:</li>
-      <li>UV:</li>
+    <p class="card-text2">
+      
     </p>
   </div>
 </div>
@@ -203,15 +217,8 @@ function callWeather(queryURL) {
 <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
 <div class="card-body text-danger">
   <h5 class="card-title"></h5>
-  <p class="card-text">
-      <li>Date:</li>
-      <li>Temperature:</li>
-      <li>Fells Like:</li>
-      <li>Max:</li>
-      <li>Min:</li>
-      <li>Humidity:</li>
-      <li>Wind Speed:</li>
-      <li>UV:</li>
+  <p class="card-text3">
+  
   </p>
 </div>
 </div>
@@ -220,15 +227,8 @@ function callWeather(queryURL) {
 <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
  <div class="card-body text-warning">
     <h5 class="card-title"></h5>
-    <p class="card-text">
-      <li>Date:</li>
-      <li>Temperature:</li>
-      <li>Fells Like:</li>
-      <li>Max:</li>
-      <li>Min:</li>
-      <li>Humidity:</li>
-      <li>Wind Speed:</li>
-      <li>UV:</li>
+    <p class="card-text4">
+    
     </p>
   </div>
  </div>
@@ -239,6 +239,37 @@ function callWeather(queryURL) {
     console.log(forecast5Days);
 
     $(".card-title").text(response.city.name);
+    $(".time1").text(moment().add(1, "days"));
+    $(".card-text2").text(moment().add(2, "days"));
+    $(".card-text3").text(moment().add(3, "days"));
+    $(".card-text4").text(moment().add(4, "days"));
+
+    $(".humidity1").text("Humidity:" + " " + response.list[7].main.humidity);
+    $(".speed1").text(
+      "Wind Speed:" + " " + response.list[7].wind.speed + "mph"
+    );
+    // Convert the temperature to fahrenheit
+    var tempF1 = (response.list[7].main.temp - 273.15) * 1.8 + 32;
+    var feelsF1 = (response.list[7].main.feels_like - 273.15) * 1.8 + 32;
+    var maxF1 = (response.list[7].main.temp_max - 273.15) * 1.8 + 32;
+
+    var minF1 = (response.list[7].main.temp_min - 273.15) * 1.8 + 32;
+
+    // add temp content to html
+    $(".temp1").text(response.list[7].main.temp);
+    $(".temp1").text("Temperature:" + " " + tempF1.toFixed(2));
+
+    // add fells like to html
+    $(".feels1").text(response.list[7].main.feels_like);
+    $("feels1").text("Feels Like:" + " " + feelsF1.toFixed(2));
+
+    // add max temp
+    $(".max1").text(response.list[7].main.temp_max);
+    $(".max1").text("Max:" + " " + maxF1.toFixed(2));
+
+    // add min temp
+    $(".min1").text(response.list[7].main.temp_min);
+    $(".min1").text("Min:" + " " + minF1.toFixed(2));
   });
 }
 $("#btn").on("click", function(e) {
