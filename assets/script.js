@@ -207,7 +207,13 @@ function callWeather(queryURL) {
   <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
   <div class="card-body text-success">
     <h5 class="card-title"></h5>
-    <p class="card-text2">
+    <p class="time2"></p>
+    <p class="humidity2"></p>
+    <p class="speed2"></p>
+    <p class="temp2"></p>
+    <p class="feels2"></p>
+    <p class="max2"></p>
+    <p class="min2"></p>
       
     </p>
   </div>
@@ -217,7 +223,13 @@ function callWeather(queryURL) {
 <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
 <div class="card-body text-danger">
   <h5 class="card-title"></h5>
-  <p class="card-text3">
+  <p class="time3"></p>
+  <p class="humidity3"></p>
+  <p class="speed3"></p>
+  <p class="temp3"></p>
+  <p class="feels3"></p>
+  <p class="max3"></p>
+  <p class="min3"></p>
   
   </p>
 </div>
@@ -227,7 +239,13 @@ function callWeather(queryURL) {
 <img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt="...">
  <div class="card-body text-warning">
     <h5 class="card-title"></h5>
-    <p class="card-text4">
+    <p class="time4"></p>
+    <p class="humidity4"></p>
+    <p class="speed4"></p>
+    <p class="temp4"></p>
+    <p class="feels4"></p>
+    <p class="max4"></p>
+    <p class="min4"></p>
     
     </p>
   </div>
@@ -240,9 +258,9 @@ function callWeather(queryURL) {
 
     $(".card-title").text(response.city.name);
     $(".time1").text(moment().add(1, "days"));
-    $(".card-text2").text(moment().add(2, "days"));
-    $(".card-text3").text(moment().add(3, "days"));
-    $(".card-text4").text(moment().add(4, "days"));
+    $(".time2").text(moment().add(2, "days"));
+    $(".time3").text(moment().add(3, "days"));
+    $(".time4").text(moment().add(4, "days"));
 
     $(".humidity1").text("Humidity:" + " " + response.list[7].main.humidity);
     $(".speed1").text(
