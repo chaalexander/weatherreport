@@ -57,43 +57,6 @@ $(newDiv).append(newForm);
 $("#input").append("#btn");
 // console.log(newForm);
 
-// creating the place to display the weather
-
-// var guestInput = $(`<div class="card bg-dark text-white">
-// <img src="http://openweathermap.org/img/wn/2x.png" class="card-img" alt="...">
-// <div class="card-img-overlay">
-//   <h5 class="card-title" id="city"></h5>
-//   <p class="card-text" id= "current-day">
-//   <h3 id="city"></h3>
-// <h5 id="date"></h5>
-// <h5 id="temperature"></h5>
-// <h5 id="feels"></h5>
-// <h5 id="max"></h5>
-// <h5 id="min"></h5>
-// <h5 id="humidity"></h5>
-// <h5 id="wind"></h5>
-// //      <h5 id="uv"></h5>
-
-//   </p>
-
-// </div>
-// </div>`);
-var guestInput = `<h3 id="city"></h3>
-    <h5 id="date"></h5>
-    <h5 id="temperature"></h5>
-    <h5 id="feels"></h5>
-    <h5 id="max"></h5>
-    <h5 id="min"></h5>
-    <h5 id="humidity"></h5>
-    <h5 id="wind"></h5>
-     <h5 id="uv"></h5>`;
-
-$("#weatherBox").append(guestInput);
-// console.log(guestInput);
-
-var urlIcon = "http://openweathermap.org/img/wn/2x.png";
-console.log(urlIcon);
-
 function callWeather(queryURL) {
   // Takes in the inputted value
   var queryTerm = $("#input")
@@ -101,7 +64,7 @@ function callWeather(queryURL) {
     .trim();
 
   // clear input
-  // $("#input").text("");
+  $("#input").empty();
 
   // queryURL for city current day
   var queryURL =
@@ -118,32 +81,29 @@ function callWeather(queryURL) {
   }).then(function(response) {
     // console.log(response);
 
-    $("#city").text(response.name);
-    $("#date").text(moment().format("dddd"));
-    $("#humidity").text("Humidity:" + " " + response.main.humidity);
-    $("#wind").text("Wind Speed: " + " " + response.wind.speed + "mph");
-
     // Convert the temperature to fahrenheit
     var tempF = (response.main.temp - 273.15) * 1.8 + 32;
     var feelsF = (response.main.feels_like - 273.15) * 1.8 + 32;
     var maxF = (response.main.temp_max - 273.15) * 1.8 + 32;
     var minF = (response.main.temp_min - 273.15) * 1.8 + 32;
+    var guestInput = $(`<div class="card bg-danger text-white">
+    <img src="http://openweathermap.org/img/wn/${
+      response.weather[0].icon
+    }@2x.png" class="card-img-top" alt="icon of weather">
+  <div class="card-img-overlay">
+  <h3>${response.name}</h3>
+  <h5>${moment().calendar()}</h5>
+  <h5>Humidity: ${response.main.humidity}</h5>
+  <h5>"Wind Speed:${response.wind.speed}"mph"</h5>
+  <h5>"Temperature:${tempF.toFixed(2)}</h5>
+  <h5>"Feels Like:${feelsF.toFixed(2)}</h5>
+  <h5>"Max:${maxF.toFixed(2)}</h5>
+  <h5>"Min:${minF.toFixed(2)}</h5>
+  <h5 id="uv"></h5>
+  </div>
+  </div>`);
 
-    // add temp content to html
-    $("#temperature").text(response.main.temp);
-    $("#temperature").text("Temperature:" + " " + tempF.toFixed(2));
-
-    // add fells like to html
-    $("#feels").text(response.main.feels_like);
-    $("#feels").text("Feels Like:" + " " + feelsF.toFixed(2));
-
-    // add max temp
-    $("#max").text(response.main.temp_max);
-    $("#max").text("Max:" + " " + maxF.toFixed(2));
-
-    // add min temp
-    $("#min").text(response.main.temp_min);
-    $("#min").text("Min:" + " " + minF.toFixed(2));
+    $("#weatherBox").append(guestInput);
 
     // making ajax call for uv
     var lat = response.coord.lat;
