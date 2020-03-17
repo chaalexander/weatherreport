@@ -160,7 +160,7 @@ function callWeather(queryURL) {
       <div class="card-body text-${color[i]}">
         <h5 class="card-title">${response.city.name}</h5>
         <div class= "card-text>
-        <p class="time"></p>
+        <p class="time">${moment.unix(response.list[i].dt).format("dddd")}</p>
         <p>Temperature: ${tempF.toFixed(2)}</p>
         <p>Feels Like: ${feelsF.toFixed(2)}</p>
         <p>Min: ${minF.toFixed(2)} </p>
