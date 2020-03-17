@@ -11,7 +11,7 @@ var keyUV = "057e14341c48286f9140a48d5cf0795f";
 // local Storage
 var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
-console.log(cityHistory);
+// console.log(cityHistory);
 
 function loadCities() {
   for (var i = 0; i < cityHistory.length; i++) {
@@ -86,14 +86,14 @@ function callWeather(queryURL) {
     queryTerm +
     "&appid=" +
     authKey;
-  console.log(queryURL);
+  // console.log(queryURL);
 
   // making the ajax call for weather
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
+    // console.log(response);
 
     $("#city").text(response.name);
     $("#date").text(setTime());
@@ -147,7 +147,7 @@ function callWeather(queryURL) {
     queryTerm +
     "&appid=" +
     authKey;
-  console.log(queryForecast);
+  // console.log(queryForecast);
 
   // ajaxcall for forecast
 
@@ -155,7 +155,7 @@ function callWeather(queryURL) {
     url: queryForecast,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
+    // console.log(response);
 
     for (var i = 0; i < 5; i++) {
       console.log(response.list[i]);
@@ -175,12 +175,16 @@ function callWeather(queryURL) {
       $(divForecast).append(forecast5Days);
 
       $("#city").text(response.city.name);
-      // $("#date").text(setTime());
+      $("#date").text(
+        moment()
+          .add(1, "days")
+          .calendar()
+      );
       $("#humidity").text("Humidity:" + " " + response.list[i].main.humidity);
       $("#wind").text(
         "Wind Speed: " + " " + response.list[i].wind.speed + "mph"
       );
-      console.log(forecast5Days);
+      // console.log(forecast5Days);
     }
   });
 }
