@@ -86,20 +86,21 @@ function callWeather(queryURL) {
     var feelsF = (response.main.feels_like - 273.15) * 1.8 + 32;
     var maxF = (response.main.temp_max - 273.15) * 1.8 + 32;
     var minF = (response.main.temp_min - 273.15) * 1.8 + 32;
-    var guestInput = $(`<div class="card bg-danger text-white">
-    <img src="http://openweathermap.org/img/wn/${
+
+    var guestInput = $(`<div class="card mb-3 border-danger" >
+    <img  src="http://openweathermap.org/img/wn/${
       response.weather[0].icon
-    }@2x.png" class="card-img-top" alt="icon of weather">
+    }@2x.png" class="card-img" alt="icon of weather">
   <div class="card-img-overlay">
-  <h3>${response.name}</h3>
-  <h5>${moment().calendar()}</h5>
-  <h5>Humidity: ${response.main.humidity}</h5>
-  <h5>"Wind Speed:${response.wind.speed}"mph"</h5>
-  <h5>"Temperature:${tempF.toFixed(2)}</h5>
-  <h5>"Feels Like:${feelsF.toFixed(2)}</h5>
-  <h5>"Max:${maxF.toFixed(2)}</h5>
-  <h5>"Min:${minF.toFixed(2)}</h5>
-  <h5 id="uv"></h5>
+  <h2 class="card-title">${response.name}</h2>
+  <h4>${moment().format("dddd")}</h4>
+  <h4>Humidity: ${response.main.humidity}</h4>
+  <h4>Wind Speed:${response.wind.speed}mph</h4>
+  <h4>Temperature:${tempF.toFixed(2)}</h4>
+  <h4>Feels Like:${feelsF.toFixed(2)}</h4>
+  <h4>Max:${maxF.toFixed(2)}</h4>
+  <h4>Min:${minF.toFixed(2)}</h4>
+  <h4 id="uv"></h4>
   </div>
   </div>`);
 
@@ -152,18 +153,20 @@ function callWeather(queryURL) {
 
       var forecastCard = $(`<div class="card border-${
         color[i]
-      } mb-3" style="max-width: 18rem;">
+      } fore" style="max-width: 18rem;">
       <img src="http://openweathermap.org/img/wn/${
         response.list[i].weather[0].icon
       }@2x.png" class="card-img-top" alt="icon of weather">
       <div class="card-body text-${color[i]}">
         <h5 class="card-title">${response.city.name}</h5>
+        <div class= "card-text>
         <p class="time"></p>
         <p>Temperature: ${tempF.toFixed(2)}</p>
         <p>Feels Like: ${feelsF.toFixed(2)}</p>
         <p>Min: ${minF.toFixed(2)} </p>
         <p>Max: ${maxF.toFixed(2)}</p>
         <p>Humidity: ${response.list[i].main.humidity}</p>
+        </div>
       </div>
       </div>`);
 

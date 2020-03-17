@@ -1,9 +1,5 @@
-body {
-  background-color: blueviolet;
-}
-
 .jumbotron {
-  background-color: blueviolet !important;
+  background-color: blue !important;
   text-align: center;
 }
 #currentDay {
@@ -24,22 +20,45 @@ body {
 
 #lastCities {
   margin-top: 15px;
-  background-color: cadetblue;
   width: 400px;
   height: 400px;
   font-size: 25px;
 }
 
 h5,
-h3 {
+p {
   text-align: center;
 }
 
 #weatherBox {
-  margin-left: -250px;
+  margin-left: -400px;
 }
 
 #forecast {
   margin-top: 30px;
-  margin-left: -200px;
+  margin-left: -400px;
+}
+.card {
+  background-color: lightblue !important;
+  font-weight: bold;
+}
+
+.mb-3 {
+  width: 900px;
+  height: 450px;
+  background-color: cornflowerblue !important;
+}
+
+h4 {
+  font-size: 30px;
+  text-align: center;
+}
+.card-title,
+.card-text {
+  font-size: 30px;
+  text-align: center;
+}
+
+.card-img {
+  opacity: 50%;
 }
