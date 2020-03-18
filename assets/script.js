@@ -11,7 +11,7 @@ var uvIndex = 0;
 // local Storage
 var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
-var queryTerm = "" || "Nashville";
+var queryTerm = "" || cityHistory[0];
 callWeather(queryTerm);
 
 function loadCities() {
@@ -54,7 +54,6 @@ function uvColor() {
 }
 
 // creating the input box, btn and display area for local storage
-
 var newDiv = $("<div>");
 
 $("#container").append(newDiv);
@@ -200,7 +199,7 @@ $("#btn").on("click", function(e) {
 
   cityDiv.text(cityInput);
 
-  cityHistory.push(cityInput);
+  cityHistory.unshift(cityInput);
 
   localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
 
