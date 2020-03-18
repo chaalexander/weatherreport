@@ -24,7 +24,7 @@ function loadCities() {
     var cityNewDiv = $("<button class='load'>");
     cityNewDiv.text(cityHistory[i]);
     cityNewDiv.appendTo(list);
-    $("#lastCities").prepend(list);
+    $("#lastCities").append(list);
   }
 }
 loadCities();
