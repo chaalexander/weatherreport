@@ -6,6 +6,7 @@ var authKey = "5558573b04f9181b5515a2cc0280e2a9";
 
 // key for UV index
 var keyUV = "057e14341c48286f9140a48d5cf0795f";
+var uvIndex = 0;
 
 // local Storage
 var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
@@ -36,6 +37,20 @@ $(document).on("click", ".load", function() {
 function setTime() {
   var time = moment().format("LLLL");
   return time;
+}
+
+function uvColor() {
+  if (uvIndex >= 11.0) {
+    $("#uv").css("color", "violet");
+  } else if (uvIndex >= 8.0 && uvIndex < 11.0) {
+    $("#uv").css("color", "red");
+  } else if (uvIndex >= 6.0 && uvIndex < 8.0) {
+    $("#uv").css("color", "orange");
+  } else if (uvIndex >= 3.0 && uvIndex < 6.0) {
+    $("#uv").css("color", "yellow");
+  } else if (uvIndex < 3.0) {
+    $("#uv").css("color", "lightblue");
+  }
 }
 
 // creating the input box, btn and display area for local storage
@@ -117,7 +132,9 @@ function callWeather(queryTerm) {
       url: queryURLuv,
       method: "GET"
     }).then(function(response) {
-      $("#uv").text("UV" + " " + response.value);
+      $("#uv")
+        .text("UV" + " " + response.value)
+        .addClass(uvColor());
     });
   });
   // queryURL for 5 days
@@ -169,6 +186,7 @@ function callWeather(queryTerm) {
 
     // closes response forecast
   });
+
   // close call weatehr
 }
 
