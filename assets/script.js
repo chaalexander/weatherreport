@@ -12,7 +12,7 @@ var uvIndex = 0;
 // local Storage
 var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
-var queryTerm = "" || "Nashville";
+var queryTerm = "" || cityHistory[0];
 callWeather(queryTerm);
 
 // console.log(cityHistory);
