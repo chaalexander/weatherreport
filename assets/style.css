@@ -62,3 +62,28 @@ h4 {
 .card-img {
   opacity: 50%;
 }
+
+
+@media screen and (max-width: 989px)
+
+    .media{
+        width: 100%;
+        height: 100%;
+        margin-left: -20px;
+    }
+    .media-body{
+        width: 100%;
+        margin-left: -10px;
+    }
+
+    h2{
+        text-align: center;
+    }
+
+    p{
+        text-align: justify;
+        font-size: 20px;
+        margin-left: 5px;
+        text-indent: 20px;
+    }
+ }
