@@ -1,5 +1,6 @@
 // moment js
 var showtime = $("#currentDay").text(setTime);
+// console.log(showtime);
 
 // key for city
 var authKey = "5558573b04f9181b5515a2cc0280e2a9";
@@ -11,8 +12,10 @@ var uvIndex = 0;
 // local Storage
 var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
-var queryTerm = "" || cityHistory[0];
+var queryTerm = "" || "Nashville";
 callWeather(queryTerm);
+
+// console.log(cityHistory);
 
 function loadCities() {
   $("#lastCities").empty();
@@ -28,7 +31,10 @@ loadCities();
 
 // function to run the cities btn
 $(document).on("click", ".load", function() {
+  console.log("you click me");
   var cityInput = $(this).text();
+  console.log($(this));
+  console.log(cityInput);
 
   callWeather(cityInput);
 });
@@ -38,7 +44,7 @@ function setTime() {
   var time = moment().format("LLLL");
   return time;
 }
-
+// console.log(setTime());
 function uvColor() {
   if (uvIndex >= 11.0) {
     $("#uv").css("color", "violet");
@@ -54,8 +60,9 @@ function uvColor() {
 }
 
 // creating the input box, btn and display area for local storage
-var newDiv = $("<div>");
 
+var newDiv = $("<div>");
+// console.log(newDiv);
 $("#container").append(newDiv);
 
 var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
@@ -76,6 +83,7 @@ var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
 </form>`);
 $(newDiv).append(newForm);
 $("#input").append("#btn");
+// console.log(newForm);
 
 function callWeather(queryTerm) {
   // queryURL for city current day
@@ -84,12 +92,14 @@ function callWeather(queryTerm) {
     queryTerm +
     "&appid=" +
     authKey;
+  // console.log(queryURL);
 
   // making the ajax call for weather
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
+    // console.log(response);
     $("#weatherBox").empty();
     // Convert the temperature to fahrenheit
     var tempF = (response.main.temp - 273.15) * 1.8 + 32;
@@ -142,6 +152,7 @@ function callWeather(queryTerm) {
     queryTerm +
     "&appid=" +
     authKey;
+  console.log(queryForecast);
 
   // ajaxcall for forecast
 
@@ -149,6 +160,8 @@ function callWeather(queryTerm) {
     url: queryForecast,
     method: "GET"
   }).then(function(response) {
+    console.log(response.list);
+
     // creating the cards for the 4 days forecast
     var forecast5Days = $(` <div class="card-group"></div>`);
     var color = ["warning", "danger", "success", "warning", "danger"];
@@ -182,14 +195,14 @@ function callWeather(queryTerm) {
       // closes for loop
     }
     $("#forecast").append(forecast5Days);
-
+    // console.log(forecast5Days);
     // closes response forecast
   });
-
   // close call weatehr
 }
 
 $("#btn").on("click", function(e) {
+  console.log("you click me");
   e.preventDefault();
 
   var cityDiv = $("<div>");
