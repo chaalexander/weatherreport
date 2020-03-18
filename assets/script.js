@@ -5,24 +5,38 @@ var showtime = $("#currentDay").text(setTime);
 // key for city
 var authKey = "5558573b04f9181b5515a2cc0280e2a9";
 
-// keyfor UV index
+// key for UV index
 var keyUV = "057e14341c48286f9140a48d5cf0795f";
 
 // local Storage
 var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
+var queryTerm = "" || "Nashville";
+callWeather(queryTerm);
+
 // console.log(cityHistory);
 
 function loadCities() {
-  for (var i = cityHistory.length - 10; i < cityHistory.length; i++) {
+  $("#lastCities").empty();
+  for (var i = 0; i < cityHistory.length; i++) {
     var list = $("<div>");
-    var cityNewDiv = $("<button>");
+    var cityNewDiv = $("<button class='load'>");
     cityNewDiv.text(cityHistory[i]);
     cityNewDiv.appendTo(list);
     $("#lastCities").append(list);
   }
 }
-console.log(loadCities());
+loadCities();
+
+// function to run the cities btn
+$(document).on("click", ".load", function() {
+  console.log("you click me");
+  var cityInput = $(this).text();
+  console.log($(this));
+  console.log(cityInput);
+
+  callWeather(cityInput);
+});
 
 // function to set the time
 function setTime() {
@@ -30,8 +44,6 @@ function setTime() {
   return time;
 }
 // console.log(setTime());
-
-var queryTerm = " ";
 
 // creating the input box, btn and display area for local storage
 
@@ -59,15 +71,7 @@ $(newDiv).append(newForm);
 $("#input").append("#btn");
 // console.log(newForm);
 
-function callWeather(queryURL) {
-  // Takes in the inputted value
-  var queryTerm = $("#input")
-    .val()
-    .trim();
-
-  // clear input
-  $("#input").empty();
-
+function callWeather(queryTerm) {
   // queryURL for city current day
   var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -82,7 +86,7 @@ function callWeather(queryURL) {
     method: "GET"
   }).then(function(response) {
     // console.log(response);
-
+    $("#weatherBox").empty();
     // Convert the temperature to fahrenheit
     var tempF = (response.main.temp - 273.15) * 1.8 + 32;
     var feelsF = (response.main.feels_like - 273.15) * 1.8 + 32;
@@ -126,7 +130,6 @@ function callWeather(queryURL) {
       $("#uv").text("UV" + " " + response.value);
     });
   });
-
   // queryURL for 5 days
   var queryForecast =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
@@ -146,7 +149,7 @@ function callWeather(queryURL) {
     // creating the cards for the 4 days forecast
     var forecast5Days = $(` <div class="card-group"></div>`);
     var color = ["warning", "danger", "success", "warning", "danger"];
-
+    $("#forecast").empty();
     for (var i = 0; i < 5; i++) {
       var tempF = (response.list[i].main.temp - 273.15) * 1.8 + 32;
       var feelsF = (response.list[i].main.feels_like - 273.15) * 1.8 + 32;
@@ -175,10 +178,13 @@ function callWeather(queryURL) {
       </div>`);
 
       forecast5Days.append(forecastCard);
+      // closes for loop
     }
     $("#forecast").append(forecast5Days);
     // console.log(forecast5Days);
+    // closes response forecast
   });
+  // close call weatehr
 }
 
 $("#btn").on("click", function(e) {
@@ -196,6 +202,14 @@ $("#btn").on("click", function(e) {
 
   localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
 
-  cityDiv.prependTo(lastCities);
-  callWeather();
+  loadCities();
+  callWeather(cityInput);
+
+  // clear input
+  $("#input").val("");
 });
+
+// Takes in the inputted value
+// var queryTerm = $("#input")
+// .val()
+// .trim();

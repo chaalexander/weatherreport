@@ -37,3 +37,31 @@
 function refreshPage() {
   window.location.reload();
 }
+
+if (localStorage.getItem("cities") == null) {
+  var defaultKey = "Nashville";
+  citiesArray.push(defaultKey);
+  localStorage.setItem("cities", JSON.stringify(citiesArray));
+}
+else {
+  citiesArray = JSON.parse(localStorage.getItem("cities"));
+}
+// Adds a new city to the buttons array, sets the array, and refreshes page
+btn.on("click", function() {
+  input = $(":text:eq(" + 0 + ")").val().trim();
+  citiesArray.push(input);
+  localStorage.setItem("cities", JSON.stringify(citiesArray));
+  refreshPage();
+});
+
+
+
+function loadBtns() {
+  for (var i=1; i < citiesArray.length; i++) {
+    // Creating new buttons with a text value of each index of citiesArray, with that same id value, appending to addedCities in html
+    $("<button>").text(citiesArray[i]).attr('id', citiesArray[i]).addClass("cities").appendTo("#lastCities");
+    $("</br>").appendTo("#addedCities");  
+    // Creating click events for the stored cities
+    $("#" + citiesArray[i]).on("click", function() {
+    var selectedCity = $(this).text();
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + selectedCity + "&appid=" + APIKey;
