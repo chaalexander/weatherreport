@@ -40,13 +40,13 @@ p {
 }
 .card {
   background-color: lightblue !important;
-  font-weight: bold;
 }
 
 .mb-3 {
   width: 52vw;
-  height: 30vw;
+  height: 25vw;
   background-color: cornflowerblue !important;
+  margin-left: 300px;
 }
 
 h4 {
@@ -61,4 +61,11 @@ h4 {
 
 .card-img {
   opacity: 50%;
+}
+
+.card-group {
+  font-weight: bold;
+  margin-left: -100px;
+  width: 1000px;
+  margin-bottom: 50px;
 }

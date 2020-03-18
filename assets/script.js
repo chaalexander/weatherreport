@@ -14,6 +14,8 @@ var cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 var queryTerm = "" || "Nashville";
 callWeather(queryTerm);
 
+// console.log(cityHistory);
+
 function loadCities() {
   $("#lastCities").empty();
   for (var i = 0; i < cityHistory.length; i++) {
@@ -41,11 +43,12 @@ function setTime() {
   var time = moment().format("LLLL");
   return time;
 }
+// console.log(setTime());
 
 // creating the input box, btn and display area for local storage
 
 var newDiv = $("<div>");
-
+// console.log(newDiv);
 $("#container").append(newDiv);
 
 var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
@@ -66,6 +69,7 @@ var newForm = $(`<form class="form-inline my-2 my-lg-0" id= "form">
 </form>`);
 $(newDiv).append(newForm);
 $("#input").append("#btn");
+// console.log(newForm);
 
 function callWeather(queryTerm) {
   // queryURL for city current day
@@ -74,6 +78,7 @@ function callWeather(queryTerm) {
     queryTerm +
     "&appid=" +
     authKey;
+  // console.log(queryURL);
 
   // making the ajax call for weather
   $.ajax({
@@ -88,13 +93,12 @@ function callWeather(queryTerm) {
     var maxF = (response.main.temp_max - 273.15) * 1.8 + 32;
     var minF = (response.main.temp_min - 273.15) * 1.8 + 32;
 
-    var guestInput = $(`<div class="card mb-3 border-danger" >
+    var guestInput = $(`<div class="card mb-3 border-danger" style="width: 18rem;" >
     <img  src="http://openweathermap.org/img/wn/${
       response.weather[0].icon
     }@2x.png" class="card-img" alt="icon of weather">
   <div class="card-img-overlay">
-  <h1 class="card-title main ">${response.name}</h1>
-  <p class="card-text">
+  <h2 class="card-title">${response.name}</h2>
   <h4>${moment().format("dddd")}</h4>
   <h4>Humidity: ${response.main.humidity}</h4>
   <h4>Wind Speed:${response.wind.speed}mph</h4>
@@ -103,7 +107,6 @@ function callWeather(queryTerm) {
   <h4>Max:${maxF.toFixed(2)}</h4>
   <h4>Min:${minF.toFixed(2)}</h4>
   <h4 id="uv"></h4>
-  </p>
   </div>
   </div>`);
 
@@ -133,6 +136,7 @@ function callWeather(queryTerm) {
     queryTerm +
     "&appid=" +
     authKey;
+  console.log(queryForecast);
 
   // ajaxcall for forecast
 
@@ -140,6 +144,8 @@ function callWeather(queryTerm) {
     url: queryForecast,
     method: "GET"
   }).then(function(response) {
+    console.log(response.list);
+
     // creating the cards for the 4 days forecast
     var forecast5Days = $(` <div class="card-group"></div>`);
     var color = ["warning", "danger", "success", "warning", "danger"];
@@ -150,15 +156,13 @@ function callWeather(queryTerm) {
       var maxF = (response.list[i].main.temp_max - 273.15) * 1.8 + 32;
       var minF = (response.list[i].main.temp_min - 273.15) * 1.8 + 32;
 
-      var forecastCard = $(`<div class="card border-${
-        color[i]
-      } fore" style="max-width: 18rem;">
+      var forecastCard = $(`<div class="card border-${color[i]} fore">
       <img src="http://openweathermap.org/img/wn/${
         response.list[i].weather[0].icon
       }@2x.png" class="card-img-top" alt="icon of weather">
       <div class="card-body text-${color[i]}">
         <h5 class="card-title">${response.city.name}</h5>
-        
+        <div class= "card-text>
         <p class="time">${moment()
           .add(i + 1, "day")
           .format("dddd")}</p>
@@ -167,7 +171,7 @@ function callWeather(queryTerm) {
         <p>Min: ${minF.toFixed(2)} </p>
         <p>Max: ${maxF.toFixed(2)}</p>
         <p>Humidity: ${response.list[i].main.humidity}</p>
-        
+        </div>
       </div>
       </div>`);
 
@@ -175,6 +179,8 @@ function callWeather(queryTerm) {
       // closes for loop
     }
     $("#forecast").append(forecast5Days);
+    // console.log(forecast5Days);
+    // closes response forecast
   });
   // close call weatehr
 }
@@ -200,3 +206,8 @@ $("#btn").on("click", function(e) {
   // clear input
   $("#input").val("");
 });
+
+// Takes in the inputted value
+// var queryTerm = $("#input")
+// .val()
+// .trim();
