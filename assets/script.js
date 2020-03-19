@@ -223,3 +223,9 @@ $("#btn").on("click", function(e) {
   // clear input
   $("#input").val("");
 });
+
+$(document).ready(function() {
+  // loadCities();
+  // callWeather();
+  loadCities();
+});
