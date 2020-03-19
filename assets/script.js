@@ -107,20 +107,20 @@ function callWeather(queryTerm) {
     var maxF = (response.main.temp_max - 273.15) * 1.8 + 32;
     var minF = (response.main.temp_min - 273.15) * 1.8 + 32;
 
-    var guestInput = $(`<div class="card mb-3 border-danger" style="width: 18rem;" >
+    var guestInput = $(`<div class="card mb-3 border-danger" style="width: 25rem; height: max-content" >
     <img  src="http://openweathermap.org/img/wn/${
       response.weather[0].icon
     }@2x.png" class="card-img" alt="icon of weather">
   <div class="card-img-overlay">
   <h2 class="card-title">${response.name}</h2>
-  <h4>${moment().format("dddd")}</h4>
-  <h4>Humidity: ${response.main.humidity}</h4>
-  <h4>Wind Speed:${response.wind.speed}mph</h4>
-  <h4>Temperature:${tempF.toFixed(2)}</h4>
-  <h4>Feels Like:${feelsF.toFixed(2)}</h4>
-  <h4>Max:${maxF.toFixed(2)}</h4>
-  <h4>Min:${minF.toFixed(2)}</h4>
-  <h4 id="uv"></h4>
+  <p>${moment().format("dddd")}</p>
+  <p>Humidity: ${response.main.humidity}</p>
+  <p>Wind Speed:${response.wind.speed}mph</p>
+  <p>Temperature:${tempF.toFixed(2)}</p>
+  <p>Feels Like:${feelsF.toFixed(2)}</p>
+  <p>Max:${maxF.toFixed(2)}</p>
+  <p>Min:${minF.toFixed(2)}</p>
+  <p id="uv"></p>
   </div>
   </div>`);
 
@@ -209,15 +209,16 @@ $("#btn").on("click", function(e) {
   var cityInput = $("#input")
     .val()
     .trim();
+  if (cityInput) {
+    cityDiv.text(cityInput);
 
-  cityDiv.text(cityInput);
+    cityHistory.unshift(cityInput);
 
-  cityHistory.unshift(cityInput);
+    localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
 
-  localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
-
-  loadCities();
-  callWeather(cityInput);
+    loadCities();
+    callWeather(cityInput);
+  }
 
   // clear input
   $("#input").val("");
