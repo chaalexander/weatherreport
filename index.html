@@ -1,76 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Report</title>
-    <!-- style sheet -->
-    <link rel="stylesheet" href="assets/style.css" />
-    <!-- Bootstrap CSS CDN  -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css"
-    />
-    <!-- font awesome -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <!-- google fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Press+Start+2P|Special+Elite&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!-- Jumbotron opens -->
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Weather Report</h1>
-        <p class="lead">
-          Welcome to the easiest and funniest weather report page out there.
-        </p>
-        <p id="currentDay"></p>
-      </div>
-      <!-- Jumbotron closes -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Report</title>
+  <!-- style sheet -->
+  <link rel="stylesheet" href="assets/style.css" />
+  <!-- Bootstrap CSS CDN  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Special+Elite&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Jumbotron opens -->
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Weather Report</h1>
+
+      <p id="currentDay"></p>
     </div>
+    <!-- Jumbotron closes -->
+  </div>
 
-    <div class="row">
-      <!-- col search opens -->
-      <div>
-        <!-- container search opens -->
-        <div id="container">
-          <!-- container search closes  -->
-        </div>
-
-        <!-- container for weather information opens -->
-        <div id="lastCities">
-          <!-- container for weather information closes -->
-        </div>
-        <!-- col search closes -->
+  <div class="row">
+    <!-- col search opens -->
+    <div>
+      <!-- container search opens -->
+      <div id="container">
+        <!-- container search closes  -->
       </div>
-      <!-- col weather opens -->
-      <div>
-        <!-- container map opens -->
-        <div id="weatherBox">
-          <!-- Note that "m8 l9" was added -->
-          <!--weather box container closes  -->
-        </div>
+
+      <!-- container for weather information opens -->
+      <div id="lastCities">
+        <!-- container for weather information closes -->
+      </div>
+      <!-- col search closes -->
+    </div>
+    <!-- col weather opens -->
+    <div>
+      <!-- container map opens -->
+      <div id="weatherBox">
+        <!-- Note that "m8 l9" was added -->
+        <!--weather box container closes  -->
       </div>
     </div>
-    <div class="row" id="forecast">
-      <!-- container for forecast opens-->
-    </div>
+  </div>
+  <div class="row" id="forecast">
+    <!-- container for forecast opens-->
+  </div>
 
-    <!-- jQuery JS -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-    <!-- moment js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <!-- Code to the JavaScript File -->
-    <script src="assets/script.js"></script>
-  </body>
-  <!-- <footer>&copy; Created by Cha Alexander</footer> -->
+  <!-- jQuery JS -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+  <!-- moment js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <!-- Code to the JavaScript File -->
+  <script src="assets/script.js"></script>
+</body>
+<!-- <footer>&copy; Created by Cha Alexander</footer> -->
+
 </html>
