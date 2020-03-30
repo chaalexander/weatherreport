@@ -11,12 +11,12 @@
 
 .display-4 {
   font-family: "Special Elite", cursive;
-  font-size: 8vw !important;
+  font-size: 100px !important;
 }
 
 #container,
 #lastCities {
-  margin-left: 3vw;
+  margin-left: -200px;
 }
 
 #lastCities {
@@ -70,4 +70,9 @@ p {
 
 h2 {
   font-size: 50px !important;
+}
+
+#weatherBox {
+  margin-left: -700px;
+
 }
