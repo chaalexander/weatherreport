@@ -30,7 +30,7 @@ function loadCities() {
 loadCities();
 
 // function to run the cities btn
-$(document).on("click", ".load", function() {
+$(document).on("click", ".load", function () {
   console.log("you click me");
   var cityInput = $(this).text();
   console.log($(this));
@@ -98,7 +98,7 @@ function callWeather(queryTerm) {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     // console.log(response);
     $("#weatherBox").empty();
     // Convert the temperature to fahrenheit
@@ -113,14 +113,14 @@ function callWeather(queryTerm) {
     }@2x.png" class="card-img" alt="icon of weather">
   <div class="card-img-overlay">
   <h2 class="card-title">${response.name}</h2>
-  <p>${moment().format("dddd")}</p>
-  <p>Humidity: ${response.main.humidity}</p>
-  <p>Wind Speed:${response.wind.speed}mph</p>
-  <p>Temperature:${tempF.toFixed(2)}</p>
-  <p>Feels Like:${feelsF.toFixed(2)}</p>
-  <p>Max:${maxF.toFixed(2)}</p>
-  <p>Min:${minF.toFixed(2)}</p>
-  <p id="uv"></p>
+  <h4>${moment().format("dddd")}</h4>
+  <h4>Humidity: ${response.main.humidity}</h4>
+  <h4>Wind Speed:${response.wind.speed}mph</h4>
+  <h4>Temperature:${tempF.toFixed(2)}</h4>
+  <h4>Feels Like:${feelsF.toFixed(2)}</h4>
+  <h4>Max:${maxF.toFixed(2)}</h4>
+  <h4>Min:${minF.toFixed(2)}</h4>
+  <h4 id="uv"></h4>
   </div>
   </div>`);
 
@@ -140,7 +140,7 @@ function callWeather(queryTerm) {
     $.ajax({
       url: queryURLuv,
       method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
       $("#uv")
         .text("UV" + " " + response.value)
         .addClass(uvColor());
@@ -159,12 +159,12 @@ function callWeather(queryTerm) {
   $.ajax({
     url: queryForecast,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response.list);
 
     // creating the cards for the 4 days forecast
     var forecast5Days = $(` <div class="card-group"></div>`);
-    var color = ["warning", "danger", "success", "warning", "danger"];
+    var color = ["warning", "danger", "warning", "danger", "warning"];
     $("#forecast").empty();
     for (var i = 0; i < 5; i++) {
       var tempF = (response.list[i].main.temp - 273.15) * 1.8 + 32;
@@ -172,21 +172,21 @@ function callWeather(queryTerm) {
       var maxF = (response.list[i].main.temp_max - 273.15) * 1.8 + 32;
       var minF = (response.list[i].main.temp_min - 273.15) * 1.8 + 32;
 
-      var forecastCard = $(`<div class="card border-${color[i]} fore">
+      var forecastCard = $(`<div id= "fore" class="card border-${color[i]} fore">
       <img src="http://openweathermap.org/img/wn/${
         response.list[i].weather[0].icon
       }@2x.png" class="card-img-top" alt="icon of weather">
       <div class="card-body text-${color[i]}">
-        <h5 class="card-title">${response.city.name}</h5>
+        <h4 id= "foreti" class="card-title">${response.city.name}</h4>
         <div class= "card-text>
-        <p class="time">${moment()
+        <h5 class="time">${moment()
           .add(i + 1, "day")
-          .format("dddd")}</p>
-        <p>Temperature: ${tempF.toFixed(2)}</p>
-        <p>Feels Like: ${feelsF.toFixed(2)}</p>
-        <p>Min: ${minF.toFixed(2)} </p>
-        <p>Max: ${maxF.toFixed(2)}</p>
-        <p>Humidity: ${response.list[i].main.humidity}</p>
+          .format("dddd")}</h5>
+        <h5>Temperature: ${tempF.toFixed(2)}</h5>
+        <h5>Feels Like: ${feelsF.toFixed(2)}</h5>
+        <h5>Min: ${minF.toFixed(2)} </h5>
+        <h5>Max: ${maxF.toFixed(2)}</h5>
+        <h5>Humidity: ${response.list[i].main.humidity}</h5>
         </div>
       </div>
       </div>`);
@@ -201,7 +201,7 @@ function callWeather(queryTerm) {
   // close call weatehr
 }
 
-$("#btn").on("click", function(e) {
+$("#btn").on("click", function (e) {
   console.log("you click me");
   e.preventDefault();
 
@@ -224,7 +224,7 @@ $("#btn").on("click", function(e) {
   $("#input").val("");
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
   // loadCities();
   // callWeather();
   loadCities();

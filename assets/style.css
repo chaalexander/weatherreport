@@ -27,7 +27,7 @@
 }
 
 h5,
-p {
+h4 {
   text-align: center;
 }
 
@@ -35,15 +35,20 @@ p {
   justify-content: space-around !important;
 }
 
-.card {
-  background-color: lightblue !important;
-  border-radius: 80px !important;
-  margin: 30px;
-}
-
+.card,
 .mb-3 {
   background-color: cornflowerblue !important;
   border-radius: 90px !important;
+  margin: 30px;
+}
+
+#fore {
+  width: 80px !important;
+  border-radius: 50px !important;
+}
+
+#foreti {
+  font-size: 20px !important;
 }
 
 .card-title,
@@ -74,5 +79,81 @@ h2 {
 
 #weatherBox {
   margin-left: -700px;
+
+}
+
+
+@media screen and (max-width: 989px) {
+
+  .jumbotron {
+    width: 100%;
+  }
+
+  .display-4 {
+    text-align: center;
+    font-size: 45px !important;
+  }
+
+  #currentDay {
+    text-align: center;
+    font-size: 15px;
+  }
+
+  #container,
+  #lastCities {
+    margin-left: auto;
+  }
+
+  #lastCities {
+    margin-top: auto;
+  }
+
+  .mb-3 {
+    margin-left: 750px;
+    width: 350px !important;
+    height: 450px !important;
+  }
+
+  .card {
+    background-color: cornflowerblue !important;
+  }
+
+  .card-title,
+  .card-text {
+    font-size: 35px !important;
+    text-align: center !important;
+    margin-bottom: 80px !important;
+  }
+
+  #fore {
+    width: 250px !important;
+    border-radius: 60px !important;
+    margin-left: 80px;
+    font-size: 25px !important;
+    text-align: center;
+  }
+
+
+  .load {
+    border-radius: 25px;
+    margin: 5px;
+    background-color: cornflowerblue;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    margin-left: 100px;
+  }
+
+  #foreti {
+    font-size: 40px !important;
+  }
+
+  h5 {
+    font-size: 25px !important;
+    margin-bottom: 20px !important;
+  }
+
+
+
 
 }
